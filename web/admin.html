@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="estock">
+
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<!-- Favicons -->		
+		<link rel="icon" href="../img/camtel.png">
+		<title>
+			Administration - E-Stock
+		</title>
+		<!--     Fonts and icons     -->
+		<link rel="stylesheet" type="text/css" href="../api//FontAwesome/css/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+		<link rel="stylesheet" href="../api/FontAwesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="../css/style_dashboard1.css?v=2.0.0">
+		<link rel="stylesheet" href="../css/principalstyle.css">
+		<!-- Documentation extras -->
+		<!-- CSS Just for demo purpose, don't include it in your project -->
+		<!--link href="../css/style_dashboard2.css" rel="stylesheet" /-->
+		<!-- iframe removal -->
+		<script type="text/javascript" src="../api/angular/js/angular.js"></script>		
+		<script type="text/javascript" src="../js/app.js"></script>
+		<script type="text/javascript" src="../js/cokis.js"></script>
+		<script type="text/javascript" src="../api/bootstrap/js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../api/bootstrap/js/bootstrap.min.js"></script>
+	</head>
+	<body class=""   ng-controller ="AdminCtrl" ng-init="start();affiche('employe')">
+		<div id="deleteMod" class="modal fade" role="dialog" ng-init="modalView()">
+		  	<div class="modal-dialog">
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      	<div class="modal-header">
+			        	<button type="button" class="close" data-dismiss="modal" ng-click='refreshmodal()'>&times;</button>
+			        	<h3 class="modal-title">			        		
+			        		<span>Attention</span>
+			        		<i class="material-icons md-48 text-warning">warning</i>
+			        	</h3>
+			      	</div>
+			      	<div class="modal-body">			        	
+			      	</div>			      	
+			    </div>
+		  	</div>
+		</div>
+		<div class="wrapper">
+			<div class="sidebar" data-color="color-7" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">				
+				<div class="logo">
+					<a href="#" class="simple-text logo-normal">
+						<img id="profile-img" class="profile-img-card img-fluid responsive-img" src="../img/logo.jpg" width="120" height="500"/>
+						<!--span>E-ST</span><span>CK</span-->
+					</a>
+				</div>
+				<div class="sidebar-wrapper">
+					<ul class="nav">
+						<li class="nav-item">
+							<a class="nav-link" href="stock.html">
+								<i class="fa fa-car"></i>
+								<!--i class="material-icons">dashboard</i-->
+								<p>Gestion Stock</p>
+							</a>
+						</li>
+						<li class="nav-item ">
+							<a class="nav-link" href="demandes.html">
+								<i class="material-icons">person</i>
+								<p>Demandes Employés</p>
+							</a>
+						</li>
+						<li class="nav-item ">
+							<a class="nav-link" href="approvisionnement.html">
+								<i class="material-icons">content_paste</i>
+								<p>Approvisionnement</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="reporting.html">
+								<i class="material-icons">library_books</i>
+								<p>Reporting</p>
+							</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="admin.html">
+								<i class="material-icons">bubble_chart</i>
+								<p>Administrer</p>
+							</a>
+						</li>											
+					</ul>
+				</div>
+			</div>
+			<div class="main-panel">
+				<!-- Navbar -->
+				<nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute fixed-top">
+					<div class="container-fluid">
+						<div class="navbar-wrapper">
+							<a class="navbar-brand" href="#pablo">Material Dashboard</a>
+						</div>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="navbar-toggler-icon icon-bar"></span>
+							<span class="navbar-toggler-icon icon-bar"></span>
+							<span class="navbar-toggler-icon icon-bar"></span>
+						</button>
+						<div class="collapse navbar-collapse justify-content-end" id="navigation">
+							<form class="navbar-form">
+								<div class="input-group no-border">
+									<input type="text" value="" class="form-control" placeholder="Search...">
+									<button type="submit" class="btn btn-white btn-round btn-just-icon">
+										<i class="material-icons">search</i>
+										<div class="ripple-container"></div>
+									</button>
+								</div>
+							</form>
+							<ul class="navbar-nav">
+								<li class="nav-item">
+									<a class="nav-link" href="#pablo">
+										<i class="material-icons">dashboard</i>
+										<p>
+											<span class="d-lg-none d-md-block">Stats</span>
+										</p>
+									</a>
+								</li>
+								<li class="nav-item dropdown">
+									<a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<i class="material-icons">notifications</i>
+										<span class="notification">5</span>
+										<p>
+											<span class="d-lg-none d-md-block">Some Actions</span>
+										</p>
+									</a>
+									<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+										<a class="dropdown-item" href="#">Mike John responded to your email</a>
+										<a class="dropdown-item" href="#">You have 5 new tasks</a>
+										<a class="dropdown-item" href="#">You're now friend with Andrew</a>
+										<a class="dropdown-item" href="#">Another Notification</a>
+										<a class="dropdown-item" href="#">Another One</a>
+									</div>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#pablo">
+										<i class="material-icons">person</i>
+										<p>
+											<span class="d-lg-none d-md-block">Account</span>
+										</p>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+				<!-- End Navbar -->
+				<div class="content">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-3 col-md-6 col-sm-6" ng-click="affiche('materiel')">
+								<div class="card card-stats">
+									<div class="card-header card-header-color1 card-header-icon">
+										<div class="card-icon">
+											<i class="material-icons">content_copy</i>
+										</div>
+										<p class="card-category">Materiel(s)</p>
+										<h3 class="card-title">Nbre
+											<small>GB</small>
+										</h3>
+									</div>
+									<div class="card-footer">
+										<div class="stats">
+											<i class="material-icons text-danger">warning</i>
+											<a href="#pablo">Get More Space...</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6 col-sm-6" ng-click="affiche('type')">
+								<div class="card card-stats">
+									<div class="card-header card-header-color2 card-header-icon">
+										<div class="card-icon">
+											<i class="material-icons">store</i>
+										</div>
+										<p class="card-category">Type Matériel</p>
+										<h3 class="card-title">Nombre</h3>
+									</div>
+									<div class="card-footer">
+										<div class="stats">
+											<i class="material-icons">date_range</i> Date
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6 col-sm-6" ng-click="affiche('marque')">
+								<div class="card card-stats">
+									<div class="card-header card-header-color3 card-header-icon">
+										<div class="card-icon">
+											<i class="material-icons">info_outline</i>
+										</div>
+										<p class="card-category">Marques Matériel</p>
+										<h3 class="card-title">Nombre</h3>
+									</div>
+									<div class="card-footer">
+										<div class="stats">
+											<i class="material-icons">local_offer</i> Date
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6 col-sm-6" ng-click="affiche('entrepot')">
+								<div class="card card-stats">
+									<div class="card-header card-header-color4 card-header-icon">
+										<div class="card-icon">
+											<i class="fa fa-twitter"></i>
+										</div>
+										<p class="card-category">Entrepot(s)</p>
+										<h3 class="card-title">Nombre</h3>
+									</div>
+									<div class="card-footer">
+										<div class="stats">
+											<i class="material-icons">update</i> Date
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6 col-sm-6" ng-click="affiche('entite')">
+								<div class="card card-stats">
+									<div class="card-header card-header-color5 card-header-icon">
+										<div class="card-icon">
+											<i class="fa fa-twitter"></i>
+										</div>
+										<p class="card-category">Entite(s)</p>
+										<h3 class="card-title">Nombre</h3>
+									</div>
+									<div class="card-footer">
+										<div class="stats">
+											<i class="material-icons">update</i> Date
+										</div>
+									</div>
+								</div>
+							</div>							
+							<div class="col-lg-3 col-md-6 col-sm-6" ng-click="affiche('fournisseur')">
+								<div class="card card-stats">
+									<div class="card-header card-header-color6 card-header-icon">
+										<div class="card-icon">
+											<i class="fa fa-twitter"></i>
+										</div>
+										<p class="card-category">Fournisseur(s)</p>
+										<h3 class="card-title">Nombre</h3>
+									</div>
+									<div class="card-footer">
+										<div class="stats">
+											<i class="material-icons">update</i> Date
+										</div>
+									</div>
+								</div>
+							</div>							
+							<div class="col-lg-3 col-md-6 col-sm-6" ng-click="affiche('employe')">
+								<div class="card card-stats">
+									<div class="card-header card-header-color7 card-header-icon">
+										<div class="card-icon">
+											<i class="fa fa-twitter"></i>
+										</div>
+										<p class="card-category">Employé(s)</p>
+										<h3 class="card-title">Nombre</h3>
+									</div>
+									<div class="card-footer">
+										<div class="stats">
+											<i class="material-icons">update</i> Date
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6 col-sm-6" ng-click="affiche('role')">
+								<div class="card card-stats">
+									<div class="card-header card-header-color1 card-header-icon">
+										<div class="card-icon">
+											<i class="fa fa-twitter"></i>
+										</div>
+										<p class="card-category">Role(s)</p>
+										<h3 class="card-title">Nombre</h3>
+									</div>
+									<div class="card-footer">
+										<div class="stats">
+											<i class="material-icons">update</i> Date
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6 col-sm-6" ng-click="affiche('etat')">
+								<div class="card card-stats">
+									<div class="card-header card-header-color1 card-header-icon">
+										<div class="card-icon">
+											<i class="fa fa-twitter"></i>
+										</div>
+										<p class="card-category">Etat(s)</p>
+										<h3 class="card-title">Nombre</h3>
+									</div>
+									<div class="card-footer">
+										<div class="stats">
+											<i class="material-icons">update</i> Date
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-10 col-md-12">
+							</div>							
+							<div class="col-lg-2 col-md-12">
+								<button class="btn btn-md btn-twitter btn-block btn-signin" type="submit" ng-click="sendCookies(sousmodule,0);go()">
+									Ajouter <i class="material-icons">add</i>
+								</button>
+							</div>
+						</div>						
+						<div class="row">							
+							<div class="col-lg-12 col-md-12">
+								<div class="card">
+									<div class="card-header card-header-color7">
+										<h4 class="card-title">{{title}}</h4>
+										<p class="card-category">Tous le matériel</p>										
+									</div>
+									<div class="card-body table-responsive">
+										<table class="table table-hover">
+											<thead class="text-color1">
+												<th ng-repeat="en in entete">{{en}}</th>
+												<!--th>ID</th>
+												<th>Nom</th>
+												<th>Numero Série</th>
+												<th>Marque</th>
+												<th>Type</th-->												
+											</thead>
+											<tbody>												
+												<tr ng-repeat="materiel in materiels" class="ligne">
+													<td>{{$index+1}}</td>
+													<td>{{materiel.result.nom_materiel}}</td>
+													<td>{{materiel.result.numero_serie}}</td>				
+													<td>{{materiel.result.marque}}</td>				
+													<td>{{materiel.result.type}}</td>				
+													<td>
+														<i class="material-icons text-color1" ng-click="sendCookies(sousmodule,materiel.result.id_materiel);go()">edit</i>			
+														<i class="material-icons text-color3" data-toggle="modal" data-target="#deleteMod" ng-click="modalView(materiel.result.id_materiel, materiel.result.nom_materiel)">delete</i>
+													</td>	
+												</tr>
+												<tr ng-repeat="type in types" class="ligne">
+													<td>{{$index+1}}</td>
+													<td>{{type.result.nom_type}}</td>
+													<td>
+														<i class="material-icons text-color1"ng-click="sendCookies(sousmodule,type.result.id_type);go()">edit</i>			
+														<i class="material-icons text-color3"data-toggle="modal" data-target="#deleteMod" ng-click="modalView(type.result.id_type, type.result.nom_type)">delete</i>
+													</td>	
+												</tr>
+												<tr ng-repeat="marque in marques" class="ligne">
+													<td>{{$index+1}}</td>
+													<td>{{marque.result.nom_marque}}</td>
+													<td>
+														<i class="material-icons text-color1" ng-click="sendCookies(sousmodule,marque.result.id_marque);go()" >edit</i>			
+														<i class="material-icons text-color3"data-toggle="modal" data-target="#deleteMod" ng-click="modalView(marque.result.id_marque, marque.result.nom_marque)">delete</i>
+													</td>	
+												</tr>
+												<tr ng-repeat="role in roles" class="ligne">
+													<td>{{$index+1}}</td>
+													<td>{{role.result.nom_role}}</td>
+													<td>
+														<i class="material-icons text-color1"ng-click="sendCookies(sousmodule,role.result.id_role);go()">edit</i>			
+														<i class="material-icons text-color3" data-toggle="modal" data-target="#deleteMod" ng-click="modalView(role.result.id_role, role.result.nom_role)">delete</i>
+													</td>	
+												</tr>
+												<tr ng-repeat="etat in etats" class="ligne">
+													<td>{{$index+1}}</td>
+													<td>{{etat.result.nom_etat}}</td>
+													<td>
+														<i class="material-icons text-color1"ng-click="sendCookies(sousmodule,etat.result.id_etat);go()">edit</i>			
+														<i class="material-icons text-color3" data-toggle="modal" data-target="#deleteMod" ng-click="modalView(etat.result.id_etat, etat.result.nom_etat)">delete</i>
+													</td>	
+												</tr>	
+												<tr ng-repeat="entite in entites" class="ligne">
+													<td>{{$index+1}}</td>
+													<td>{{entite.result.nom_entite}}</td>
+													<td>{{entite.result.nomenclature}}</td>
+													<td>
+														<i class="material-icons text-color1"ng-click="sendCookies(sousmodule,entite.result.id_entite);go()">edit</i>
+														<i class="material-icons text-color3"data-toggle="modal" data-target="#deleteMod" ng-click="modalView(entite.result.id_entite, entite.result.nom_entite)">delete</i>
+													</td>	
+												</tr>
+												<tr ng-repeat="employe in employes" class="ligne">
+													<td>{{$index+1}}</td>
+													<td>{{employe.result.matricule_emp}}</td>
+													<td>{{employe.result.nom_emp}}</td>
+													<td>{{employe.result.prenom_emp}}</td>
+													<td>{{employe.result.entite_emp}}</td>
+													<td>{{employe.result.role_emp}}</td>
+													<td>
+														<i class="material-icons text-color1"ng-click="sendCookies(sousmodule,employe.result.id_emp);go()">edit</i>			
+														<i class="material-icons text-color3"data-toggle="modal" data-target="#deleteMod" ng-click="modalView(employe.result.id_emp, employe.result.nom_emp+' '+ employe.result.prenom_emp)">delete</i>
+													</td>	
+												</tr>
+												<tr ng-repeat="fournisseur in fournisseurs" class="ligne">
+													<td>{{$index+1}}</td>
+													<td>{{fournisseur.result.nom_fournisseur}}</td>
+													<td>{{fournisseur.result.adresse_fournisseur}}</td>
+													<td>{{fournisseur.result.tel_fournisseur}}</td>
+													<td>
+														<i class="material-icons text-color1"ng-click="sendCookies(sousmodule,fournisseur.result.id_fournisseur);go()">edit</i>			
+														<i class="material-icons text-color3"data-toggle="modal" data-target="#deleteMod" ng-click="modalView(fournisseur.result.id_fournisseur, fournisseur.result.nom_fournisseur+' de '+ fournisseur.result.adresse_fournisseur)">delete</i>
+													</td>	
+												</tr>
+												<tr ng-repeat="entrepot in entrepots" class="ligne">
+													<td>{{$index+1}}</td>
+													<td>{{entrepot.result.nom_entrepot}}</td>
+													<td>{{entrepot.result.adresse_entrepot}}</td>
+													<td>{{entrepot.result.capacite}}</td>
+													<td>
+														<i class="material-icons text-color1"ng-click="sendCookies(sousmodule,entrepot.result.id_entrepot);go()">edit</i>			
+														<i class="material-icons text-color3"data-toggle="modal" data-target="#deleteMod" ng-click="modalView(entrepot.result.id_entrepot, entrepot.result.nom_entrepot+' de '+entrepot.result.adresse_entrepot)">delete</i>
+													</td>	
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<footer class="footer ">
+					<div class="container-fluid">
+						<nav class="pull-left">
+							<ul>
+								<li>
+									<a href="#">
+										E-stock
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										DRL CAMTEL
+									</a>
+								</li>								
+							</ul>
+						</nav>
+						<div class="copyright pull-right">
+							&copy;
+							<script>
+								document.write(new Date().getFullYear())
+							</script>, made with love by
+							<a href="#" target="_blank">Camtel - IUT Douala </a>.
+						</div>
+					</div>
+				</footer>
+			</div>
+		</div>
+	</body>	
+</html>

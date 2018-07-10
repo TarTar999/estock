@@ -1,0 +1,34 @@
+	<head>
+		<title>Connexion - E-Stock</title>
+		<link href="../res/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../css/style_login.css" rel="stylesheet">
+		<script src="../res/bootstrap/js/bootstrap.min.js"></script>
+		<script src="../res/bootstrap/js/jquery-1.11.1.min.js"></script>
+		<script src="../res/angular/angular.js"></script>
+	</head>
+	<body>
+		<div>
+		<div class="container">
+			<div class="card card-container">
+				<!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+				<img id="profile-img" class="profile-img-card" src="../img/avatar_profile.png" />
+				<p id="profile-name" class="profile-name-card">theresa</p>
+				<form class="form-signin">
+					<span id="reauth-email" class="reauth-email"></span>
+					<input type="email" id="inputEmail" class="form-control" placeholder="Adresse Email"  autofocus>
+					<input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe " >
+					<div id="remember" class="checkbox">
+						<label>
+							<input type="checkbox" value="remember-me"> Se souvenir de moi 
+						</label>
+					</div>
+					<button class="btn btn-lg btn-primary btn-block btn-signin" ng-click="connect()">Sign in</button>
+				</form><!-- /form -->
+				<a href="#" class="forgot-password">
+					Mot de passe oubli&eacute ?
+				</a>
+			</div><!-- /card-container -->
+		</div><!-- /container -->
+		</div>
+	</body>
+	</body>

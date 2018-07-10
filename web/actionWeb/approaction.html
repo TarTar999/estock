@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="estock">
+
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />		
+		<title>
+			Approvisionnement - E-Stock
+		</title>		
+		<link rel="stylesheet" type="text/css" href="../../api//FontAwesome/css/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+		<link rel="stylesheet" href="../../api/FontAwesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="../../css/style_dashboard1.css?v=2.0.0">
+		<link rel="stylesheet" href="../../css/principalstyle.css">		
+		<script type="text/javascript" src="../../api/angular/js/angular.js"></script>		
+		<script type="text/javascript" src="../../js/app.js"></script>
+		<script type="text/javascript" src="../../js/cokis.js"></script>
+		<script type="text/javascript" src="../../api/bootstrap/js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../../api/bootstrap/js/bootstrap.min.js"></script>		
+	</head>
+	<body class=""   ng-controller ="ActionStockCtrl" ng-init="start();initial()">
+		<div class="wrapper">
+			<div class="sidebar" data-color="color-7" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">				
+				<div class="logo">
+					<a href="#" class="simple-text logo-normal">
+						<img id="profile-img" class="profile-img-card img-fluid responsive-img" src="../../img/logo.jpg" width="120" height="500" alt="profile" />						
+					</a>
+				</div>
+				<div class="sidebar-wrapper">
+					<ul class="nav">
+						<li class="nav-item">
+							<a class="nav-link" href="../stock.html">
+								<i class="material-icons">dashboard</i>
+								<p>Gestion Stock</p>
+							</a>														
+						</li>
+						<li class="nav-item ">
+							<a class="nav-link" href="../demandes.html">
+								<i class="material-icons">person</i>
+								<p>Demandes Employés</p>
+							</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="../approvisionnement.html">
+								<i class="material-icons">content_paste</i>
+								<p>Approvisionnement</p>
+							</a>
+							<ul class="submenu" ng-show="type=='sortie'">
+									<li class="nav-item ">
+										<a class="nav-link" href="stockaction.html" onclick="creerCookie('pageact','entree',7)">
+											<i class="material-icons">add</i>
+											<p>Ajout Entrée</p>
+										</a>
+									</li>
+									<li class="nav-item subactive">
+										<a class="nav-link" href="stockaction.html" onclick="creerCookie('pageact','sortie',7)">
+											<i class="material-icons">add</i>
+											<p>Ajout Sortie</p>
+										</a>
+									</li>	
+								</ul>
+								<ul class="submenu" ng-show="type=='entree'">
+									<li class="nav-item subactive">
+										<a class="nav-link" href="stockaction.html" onclick="creerCookie('pageact','entree',7);">
+											<i class="material-icons">add</i>
+											<p>Ajout Entrée</p>
+										</a>
+									</li>
+									<li class="nav-item ">
+										<a class="nav-link" href="stockaction.html" onclick="creerCookie('pageact','sortie',7)">
+											<i class="material-icons">add</i>
+											<p>Ajout Sortie</p>
+										</a>
+									</li>	
+								</ul>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="../reporting.html">
+								<i class="material-icons">library_books</i>
+								<p>Reporting</p>
+							</a>
+						</li>
+						<li class="nav-item ">
+							<a class="nav-link" href="../admin.html">
+								<i class="material-icons">bubble_chart</i>
+								<p>Administrer</p>
+							</a>
+						</li>											
+					</ul>
+				</div>
+			</div>
+			<div class="main-panel">
+				<!-- Navbar -->
+				<nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute fixed-top">
+					<div class="container-fluid">
+						<div class="navbar-wrapper">
+							<a class="navbar-brand" href="#pablo">Approvisionnement</a>
+						</div>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="navbar-toggler-icon icon-bar"></span>
+							<span class="navbar-toggler-icon icon-bar"></span>
+							<span class="navbar-toggler-icon icon-bar"></span>
+						</button>
+						<div class="collapse navbar-collapse justify-content-end" id="navigation">
+							<form class="navbar-form">
+								<div class="input-group no-border">
+									<input type="text" value="" class="form-control" placeholder="Search...">
+									<button type="submit" class="btn btn-white btn-round btn-just-icon">
+										<i class="material-icons">search</i>
+										<div class="ripple-container"></div>
+									</button>
+								</div>
+							</form>
+							<ul class="navbar-nav">
+								<li class="nav-item">
+									<a class="nav-link" href="#pablo">
+										<i class="material-icons">dashboard</i>
+										<p>
+											<span class="d-lg-none d-md-block">Stats</span>
+										</p>
+									</a>
+								</li>
+								<li class="nav-item dropdown">
+									<a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<i class="material-icons">notifications</i>
+										<span class="notification">5</span>
+										<p>
+											<span class="d-lg-none d-md-block">Some Actions</span>
+										</p>
+									</a>
+									<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+										<a class="dropdown-item" href="#">Mike John responded to your email</a>
+										<a class="dropdown-item" href="#">You have 5 new tasks</a>
+										<a class="dropdown-item" href="#">You're now friend with Andrew</a>
+										<a class="dropdown-item" href="#">Another Notification</a>
+										<a class="dropdown-item" href="#">Another One</a>
+									</div>
+								</li>
+								<li class="nav-item dropdown">
+									<a class="nav-link" href="#" id="notif" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<i class="material-icons">person</i>
+										<span class="notification">5</span>
+										<p>
+											<span class="d-lg-none d-md-block">Account</span>
+										</p>
+									</a>
+									<div class="dropdown-menu dropdown-menu-right" aria-labelledby="notif">
+										<a class="dropdown-item" href="#">{{emp.employe.result.nom_emp +' '+emp.employe.result.prenom_emp}}</a>
+										<a class="dropdown-item" href="#">{{emp.entite.result.nom_entite}}</a>
+										<a class="dropdown-item" href="#">{{emp.role.result.nom_role}}</a>
+
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="#" ng-click="stop()">Deconnexion</a>
+										<!--a class="dropdown-item" href="#">Another One</a-->
+									</div>
+								</li>								
+							</ul>
+						</div>
+					</div>
+				</nav>
+				<!-- End Navbar -->
+				<div class="content">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-10 col-md-12">
+							</div>							
+							<div class="col-lg-2 col-md-12">{{"theresa : "+idsousmod+" EMploye : "+empploy}}
+								<button ng-show ='idsousmod ==0 || idsousmod == null' class="btn btn-md btn-twitter btn-block btn-signin" type="button" ng-click="saveee(qtemat,nbrmat,datecr,emp.employe.result.id_emp,entrpo.result.id_entrepot)">
+									Enregistrer									
+								</button>
+								<button ng-show ='idsousmod !=0 && idsousmod != null' class="btn btn-md btn-twitter btn-block btn-signin" type="button" ng-click="update(idsousmod,qtemat,nbrmat,datecr,emp.employe.result.id_emp,entrpo.result.id_entrepot)">
+									Enregistrer									
+								</button>
+							</div>
+						</div>	
+						<div class="row icon-addon addon-lg">
+							<div class="col-lg-4">							
+							</div>
+							<div class="col-lg-4">
+								<label>Date Enregistrement</label><br>
+								<input ng-model="datecr" type="date" placeholder="Objet de la sortie" class=" control-form" id="nbcvnbvb:">
+							</div>
+							<div class="col-lg-4">								
+								<label>Fournisseur</label><br>
+								<select id="combobox" class="custom-select" ng-change="chargeMat(entrpo.result.id_entrepot); chargeMax(idd)" ng-options="en as en.result.nom_entrepot+' '+en.result.adresse_entrepot for en in entrepot track by en.result.id_entrepot" ng-model="entrpo">
+									<!--option ng-repeat="en in entrepot" value="{{en.result.id_entrepot}}">
+										{{en.result.nom_entrepot}} {{en.result.adresse_entrepot}}
+									</option-->
+								</select>												
+							</div>							
+						</div>									
+						<br>				
+						<div class="row icon-addon addon-lg">
+							<div class="col-lg-4">								
+							</div>
+							<div class="col-lg-4" ng-init="nbrmat=0;">								
+								<label>Nombre Matériel : </label><br>				
+								<span>{{nbrmat=lignes.length}}</span>
+							</div>
+							<div class="col-lg-4" ng-init="qtemat=0;">
+								<label>Quantite Materiel </label><br>				
+								<span>{{qtemat}}</span>
+							</div>
+						</div>									
+						<br>				
+						<div class="row">							
+							<div class="col-lg-12 col-md-12">
+								<div class="card">
+									<div class="card-header card-header-color7">
+										<h4 class="card-title">{{title}}</h4>
+										<p class="card-category">Tous le matériel</p>
+									</div>
+									<div class="card-body table-responsive">
+										<table class="table table-hover">
+											<thead class="text-color1">
+												<th ng-repeat="en in entete">{{en}}</th>	
+											</thead>											
+											<tbody id="ligne">											
+												<tr class="ligne" ng-repeat="ligne in lignes"  ng-if="type=='sortie'">
+													<td>{{$index+1}}</td>
+													<td>
+														<div ng-hide="modified">
+															{{ligne.materielnom}}	
+														</div>
+														<div class="ui-widget" ng-show="modified">			
+															<select id="material" class="custom-select col-lg-9" ng-options="matt as matt.result.nom_materiel for matt in materielsortable track by matt.result.id_materiel" ng-model="idmateriel">
+														</div>
+													</td>
+													<td>
+														<div ng-hide="modified">
+															{{ligne.quantite}}	
+														</div>
+														<div class="input-group" ng-show="modified">
+															<input type="number" name="quant" id="quant"  class="control-form input-number col-lg-9" value="1" min="1" ng-max="idmateriel.materiel.quantite" ng-model="qte">							
+														</div>
+													</td>
+													<td>
+														<div ng-hide="modified">
+															{{ligne.nometat}}	
+														</div>
+														
+														<div class="ui-widget" ng-show="modified">
+															<select id="material" class="custom-select col-lg-9" ng-options="eta as eta.result.nom_etat for eta in etat track by eta.result.id_etat" ng-model="ideta">
+																<!--option ng-repeat="mat in materiel" value="{{mat.result.id_materiel}}">
+																	{{mat.result.nom_materiel}}
+																</option-->	
+															</select>									
+														</div>
+													</td>
+													<td>
+														<div ng-hide="modified">
+															{{ligne.entitenom}}	
+														</div>
+														<div class="input-group" ng-show="modified">
+															<select class="custom-select" ng-options="ent as ent.result.nom_entite for ent in entite track by ent.result.id_entite" ng-model="identite">
+																<!--option ng-repeat="ent in entite" value="{{ent.result.id_entite}}">
+																	{{ent.result.nom_entite}}
+																</option-->									
+															</select>			
+														</div>
+													</td>												
+													<td ng-hide="empploy!=0 && empploy!=emp.employe.result.id_emp">
+														<div ng-hide="modified">
+															<i class="material-icons text-color1" ng-click="modified=true;updateligneAsk(ligne.id,ligne.materiel,ligne.quantite,ligne.entite)">edit</i>
+															<i class="material-icons text-color3 " ng-click="delete(ligne.materiel,ligne.entite,entrpo.result.id_entrepot)">delete</i>
+														</div>										
+														<div ng-show="modified">
+															<i class="material-icons text-color1" ng-click=" updateligneTemp(0,ligne.materiel,idmateriel.result.id_materiel,idmateriel.result.nom_materiel,qte,ideta.result.id_etat,ideta.result.nom_etat,ligne.entite,identite.result.id_entite,identite.result.nom_entite);countQte(); modified=false">done</i>				
+															<i class="material-icons text-color3">cancel</i>
+															</div>
+													</td>
+												</tr>
+												<tr class="ligne" ng-repeat="ligne in lignes" ng-if="type=='entree'">							
+													<td>{{$index+1}}</td>
+													<td>
+														<div ng-hide="modified">
+															{{ligne.materielnom}}	
+														</div>
+														
+														<div class="ui-widget" ng-show="modified">
+															<select id="material" class="custom-select col-lg-9" ng-options="mat as mat.result.nom_materiel for mat in materiel track by mat.result.id_materiel" ng-model="idmateriel">
+																<!--option ng-repeat="mat in materiel" value="{{mat.result.id_materiel}}">
+																	{{mat.result.nom_materiel}}
+																</option-->	
+															</select>									
+														</div>
+													</td>
+													<td>
+														<div ng-hide="modified">
+															{{ligne.quantite}}	
+														</div>
+														<div class="input-group" ng-show="modified">		
+															<input type="number" name="quant" id="quant" class="control-form input-number col-lg-9" value="1" min="1" ng-model="qte">				
+														</div>
+													</td>
+													<td>
+														<div ng-hide="modified">
+															{{ligne.nometat}}	
+														</div>
+														
+														<div class="ui-widget" ng-show="modified">
+															<select id="material" class="custom-select col-lg-9" ng-options="eta as eta.result.nom_etat for eta in etat track by eta.result.id_etat" ng-model="ideta">
+																<!--option ng-repeat="mat in materiel" value="{{mat.result.id_materiel}}">
+																	{{mat.result.nom_materiel}}
+																</option-->	
+															</select>									
+														</div>
+													</td>
+													<td ng-hide="empploy!=0 && empploy!=emp.employe.result.id_emp">
+														<div ng-hide="modified">
+															<i class="material-icons text-color1" ng-click="modified=true;updateligneAsk(ligne.id,ligne.materiel,ligne.quantite,ligne.entite)">edit</i>
+															<i class="material-icons text-color3 " ng-click="delete(ligne.materiel,ligne.entite,entrpo.result.id_entrepot)">delete</i>
+														</div>										
+														<div ng-show="modified">
+															<i class="material-icons text-color1" ng-click="updateligneTemp(0,ligne.materiel,idmateriel.result.id_materiel,idmateriel.result.nom_materiel,qte,ideta.result.id_etat,ideta.result.nom_etat,ligne.entite,0,''); countQte(); modified=false">done</i>
+															<i class="material-icons text-color3">cancel</i>
+															</div>
+													</td>
+												</tr>
+												<tr class="ligne" ng-hide="empploy!=0 && empploy!=emp.employe.result.id_emp" ng-if="type=='entree'">
+														<td>0</td>
+														<td>
+															<div class="ui-widget">
+																<select class="custom-select col-lg-9"  ng-options="mat as mat.result.nom_materiel for mat in materiel track by mat.result.id_materiel" ng-model="idmateriel">
+																	<!--option ng-repeat="mat in materiel" value="{{mat.result.id_materiel}}">
+																		{{mat.result.nom_materiel}}
+																	</option-->	
+																</select>
+															</div>												
+														</td>
+														<td>
+															<div class="input-group">		
+																<input type="number" name="quant" id="quant"  class="control-form input-number col-lg-9" value="1" min="1" ng-model="qte">
+															</div>				
+														</td>										
+														<td>			
+															<div class="input-group">				
+																<select class="custom-select" ng-options="eta as eta.result.nom_etat for eta in etat track by eta.result.id_etat" ng-model="ideta">							
+																</select>			
+															</div>
+														</td>		
+														<td>		
+															<i ng-show='type=="entree"'class="material-icons text-color1" ng-click="saveligneTemp(0,idmateriel.result.id_materiel,idmateriel.result.nom_materiel,qte,ideta.result.id_etat,ideta.result.nom_etat,0,'');countQte();modified=false">done</i>
+															<i class="material-icons text-color3">cancel</i>
+														</td>
+												</tr>
+
+												<tr class="ligne" ng-hide="empploy!=0 && empploy!=emp.employe.result.id_emp" ng-if="type=='sortie'">
+														<td>0</td>
+														<td>												
+															<div class="ui-widget">
+																<select class="custom-select col-lg-9"  ng-change="chargeMax(idmateriel.result.id_materiel)" ng-options="matt as matt.result.nom_materiel for matt in materielsortable track by matt.result.id_materiel" ng-model="idmateriel">
+																	<!--option ng-repeat="mat in materiel" value="{{mat.result.id_materiel}}">
+																		{{mat.result.nom_materiel}}
+																	</option-->	
+																</select>									
+															</div>
+														</td>
+														<td>												
+															<div class="input-group">				
+																<input type="number" name="quant" id="quant"  class="control-form input-number col-lg-9" value="1" min="1" max="{{qteMax}}" ng-model="qte">		
+															<div class="input-group">						
+														</td>
+														<td>
+															<div class="input-group">						
+																<select class="custom-select" ng-options="eta as eta.result.nom_etat for eta in etat track by eta.result.id_etat" ng-model="ideta">
+																	<!--option ng-repeat="ent in entite" value="{{ent.result.id_entite}}">
+																		{{ent.result.nom_entite}}
+																	</option-->									
+																</select>			
+															</div>
+														</td>			
+														<td>
+															<div class="input-group">						
+																<select class="custom-select" ng-options="ent as ent.result.nom_entite for ent in entite track by ent.result.id_entite" ng-model="identite">
+																	<!--option ng-repeat="ent in entite" value="{{ent.result.id_entite}}">
+																		{{ent.result.nom_entite}}
+																	</option-->									
+																</select>			
+															</div>
+														</td>			
+														<td>	
+															<i class="material-icons text-color1" ng-click="saveligneTemp(0,idmateriel.result.id_materiel,idmateriel.result.nom_materiel,qte,ideta.result.id_etat,ideta.result.nom_etat,identite.result.id_entite,identite.result.nom_entite); countQte();modified=false">done</i>										
+															<i class="material-icons text-color3">cancel</i>
+														</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<footer class="footer ">
+					<div class="container-fluid">
+						<nav class="pull-left">
+							<ul>
+								<li>
+									<a href="#">
+										E-stock
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										DRL CAMTEL
+									</a>
+								</li>								
+							</ul>
+						</nav>
+						<div class="copyright pull-right">
+							&copy;
+							<script>
+								document.write(new Date().getFullYear())
+							</script>, made with love by
+							<a href="#" target="_blank">Camtel - IUT Douala </a>.
+						</div>
+					</div>
+				</footer>
+			</div>
+		</div>
+	</body>	
+</html>

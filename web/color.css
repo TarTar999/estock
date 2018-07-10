@@ -1,0 +1,30 @@
+HEX
+#2471a3
+#808b96
+#273746
+#85c1e9
+#d7dbdd
+#fdfefe
+#1B4F72
+
+
+RGB
+rgb(36, 113, 163)
+rgb(128, 139, 150)
+rgb(39, 55, 70)
+rgb(133, 193, 233)
+rgb(215, 219, 221)
+rgb(253, 254, 254)
+
+card .card-header-info .card-icon,
+  .card .card-header-info .card-text,
+  .card .card-header-info:not(.card-header-icon):not(.card-header-text), .card.bg-info,
+  .card.card-rotate.bg-info .front,
+  .card.card-rotate.bg-info .back {
+    background: linear-gradient(60deg, #26c6da, #00acc1); }
+
+#00a5bb
+89229b
+9c27b0
+
+    9c27b0
